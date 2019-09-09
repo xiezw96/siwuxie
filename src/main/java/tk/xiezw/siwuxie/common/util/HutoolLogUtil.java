@@ -26,19 +26,14 @@ public class HutoolLogUtil {
         log.warn(msg);
     }
 
-    public static void warn(Class<?> clazz, Throwable t) {
-        log = LogFactory.get(clazz);
-        log.warn(t, "全局异常处理");
-    }
-
     public static void error(Class<?> clazz, String msg) {
         log = LogFactory.get(clazz);
         log.error(msg);
     }
 
-    public static void error(Class<?> clazz, Throwable t) {
+    public static void error(Class<?> clazz, String msg, Throwable t) {
         log = LogFactory.get(clazz);
-        log.error(t, "全局异常处理");
+        log.error(t, msg);
     }
 
 }
