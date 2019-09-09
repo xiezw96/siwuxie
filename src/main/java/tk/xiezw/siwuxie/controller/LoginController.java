@@ -3,7 +3,7 @@ package tk.xiezw.siwuxie.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import tk.xiezw.siwuxie.common.util.Result;
+import tk.xiezw.siwuxie.common.util.R;
 import tk.xiezw.siwuxie.service.LoginService;
 
 /**
@@ -17,9 +17,9 @@ public class LoginController {
     private LoginService loginService;
 
     @GetMapping("/login")
-    public Result login() {
+    public R login() {
         loginService.test();
-        return Result.ok("login");
+        return R.ok("login");
     }
 
 }
