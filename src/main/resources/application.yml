@@ -1,0 +1,12 @@
+server:
+  port: 80
+
+spring:
+  devtools:
+    livereload:
+      enabled: false
+  profiles:
+    active: dev
+
+logging:
+  file: siwuxie.log
