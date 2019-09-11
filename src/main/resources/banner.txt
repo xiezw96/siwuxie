@@ -1,0 +1,15 @@
+${AnsiColor.BRIGHT_YELLOW}
+                __,
+               .-'_-'`
+             .' {`
+         .-'````'-.    .-'``'.
+       .'(0)       '._/ _.-.  `\
+      }     '. ))    _<`    )`  |
+       `-.,\'.\_,.-\` \`---; .' /       ${AnsiColor.BRIGHT_RED}锦鲤在上${AnsiColor.BRIGHT_YELLOW}
+            )  )       '-.  '--:        ${AnsiColor.BRIGHT_RED}永不宕机${AnsiColor.BRIGHT_YELLOW}
+           ( ' (          ) '.  \
+            '.  )      .'(   /   )
+              )/      (   '.    /
+                       '._( ) .'
+                           ( (
+                            `-.
