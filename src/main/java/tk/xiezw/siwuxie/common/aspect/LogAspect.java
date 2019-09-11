@@ -6,7 +6,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
-import tk.xiezw.siwuxie.common.util.HutoolLogUtil;
+import tk.xiezw.siwuxie.common.util.LogUtil;
 
 /**
  * @author xiezw
@@ -22,12 +22,12 @@ public class LogAspect {
 
     @Before("pointcut()")
     private void before(JoinPoint point) {
-        HutoolLogUtil.info(point.getTarget().getClass(), "请求开始...");
+        LogUtil.info(point.getTarget().getClass(), "请求开始...");
     }
 
     @After("pointcut()")
     private void after(JoinPoint point) {
-        HutoolLogUtil.info(point.getTarget().getClass(), "请求结束...");
+        LogUtil.info(point.getTarget().getClass(), "请求结束...");
     }
 
 }
