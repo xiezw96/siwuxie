@@ -2,7 +2,9 @@ package tk.xiezw.siwuxie;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import tk.xiezw.siwuxie.common.util.LogUtil;
+import org.springframework.context.ConfigurableApplicationContext;
+import tk.xiezw.siwuxie.common.util.Context;
+import tk.xiezw.siwuxie.common.util.HutoolLog;
 
 /**
  * @author xiezw
@@ -13,8 +15,9 @@ public class SiwuxieApplication {
 
     public static void main(String[] args) {
         Class<SiwuxieApplication> clazz = SiwuxieApplication.class;
-        SpringApplication.run(clazz, args);
-        LogUtil.info(clazz, "思无邪已启动！");
+        ConfigurableApplicationContext context = SpringApplication.run(clazz, args);
+        Context.setApplicationContext(context);
+        HutoolLog.info(clazz, "思无邪已启动！");
     }
 
 }

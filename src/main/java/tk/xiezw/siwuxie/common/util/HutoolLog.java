@@ -7,7 +7,7 @@ import cn.hutool.log.LogFactory;
  * @author xiezw
  * @date 2019/9/10
  */
-public class LogUtil {
+public class HutoolLog {
 
     private static Log log = LogFactory.get();
 

@@ -3,6 +3,7 @@ package tk.xiezw.siwuxie.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+import tk.xiezw.siwuxie.common.util.HutoolCache;
 import tk.xiezw.siwuxie.common.util.R;
 import tk.xiezw.siwuxie.service.LoginService;
 
@@ -18,7 +19,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public R login() {
-        loginService.test();
+        HutoolCache.redisSet("sssss", "sssss");
         return R.ok("login");
     }
 

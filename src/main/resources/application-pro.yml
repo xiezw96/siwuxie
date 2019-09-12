@@ -17,3 +17,12 @@ spring:
 logging:
   level:
     root: error
+
+siwuxie:
+  localcache:
+    capacity: 3000
+  rediscache:
+    host: localhost
+    port: 6379
+    databese: 0
+    password:
