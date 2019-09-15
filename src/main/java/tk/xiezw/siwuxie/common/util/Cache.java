@@ -1,6 +1,6 @@
 package tk.xiezw.siwuxie.common.util;
 
-import cn.hutool.cache.Cache;
+import cn.hutool.cache.CacheUtil;
 import cn.hutool.db.nosql.redis.RedisDS;
 import cn.hutool.setting.Setting;
 import org.springframework.context.ApplicationContext;
@@ -12,9 +12,9 @@ import tk.xiezw.siwuxie.common.propertie.RedisCachePropertie;
  * @author xiezw
  * @date 2019/9/10
  */
-public class HutoolCache {
+public class Cache {
 
-    private static Cache<String, String> fifoCache;
+    private static cn.hutool.cache.Cache<String, String> fifoCache;
 
     private static Jedis jedis;
 
@@ -27,7 +27,7 @@ public class HutoolCache {
             setting.set("port", String.valueOf(redisCachePropertie.getPort()));
             setting.set("database", String.valueOf(redisCachePropertie.getDatabese()));
             setting.set("password", redisCachePropertie.getPassword());
-            fifoCache = cn.hutool.cache.CacheUtil.newFIFOCache(localCachePropertie.getCapacity());
+            fifoCache = CacheUtil.newFIFOCache(localCachePropertie.getCapacity());
             jedis = RedisDS.create(setting, null).getJedis();
         } else {
             fifoCache = cn.hutool.cache.CacheUtil.newFIFOCache(3000);

@@ -1,15 +1,14 @@
 package tk.xiezw.siwuxie.common.util;
 
-import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
 /**
  * @author xiezw
  * @date 2019/9/10
  */
-public class HutoolLog {
+public class Log {
 
-    private static Log log = LogFactory.get();
+    private static cn.hutool.log.Log log = LogFactory.get();
 
     public static void debug(Class<?> clazz, String msg) {
         log = LogFactory.get(clazz);

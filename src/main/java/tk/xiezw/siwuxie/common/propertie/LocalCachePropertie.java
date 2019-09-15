@@ -8,9 +8,10 @@ import org.springframework.stereotype.Component;
  * @author xiezw
  * @date 2019/9/10
  */
-@Data
-@ConfigurationProperties("siwuxie.localcache")
+
 @Component
+@ConfigurationProperties("siwuxie.localcache")
+@Data
 public class LocalCachePropertie {
 
     private int capacity;

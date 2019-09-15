@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
  * @author xiezw
  * @date 2019/9/10
  */
-@Data
-@ConfigurationProperties("siwuxie.rediscache")
 @Component
+@ConfigurationProperties("siwuxie.rediscache")
+@Data
 public class RedisCachePropertie {
 
     private String host;
