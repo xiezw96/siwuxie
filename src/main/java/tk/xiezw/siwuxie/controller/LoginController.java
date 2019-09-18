@@ -16,4 +16,7 @@ public class LoginController {
         return R.ok("login");
     }
 
+    public static void main(String[] args) {
+    }
+
 }
