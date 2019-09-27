@@ -31,7 +31,7 @@ public class Cache {
             jedis = RedisDS.create(setting, null).getJedis();
         } else {
             fifoCache = cn.hutool.cache.CacheUtil.newFIFOCache(3000);
-            jedis = RedisDS.create(new Setting("file/setting/redis.setting"), null).getJedis();
+            jedis = RedisDS.create().getJedis();
         }
     }
 
