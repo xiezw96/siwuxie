@@ -1,7 +1,4 @@
 spring:
-  devtools:
-    restart:
-      enabled: false
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/siwuxie
@@ -9,20 +6,7 @@ spring:
     password: root
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
-    open-in-view: false
+    open-in-view: true
     show-sql: false
     hibernate:
       ddl-auto: none
-
-logging:
-  level:
-    root: error
-
-siwuxie:
-  localcache:
-    capacity: 3000
-  rediscache:
-    host: localhost
-    port: 6379
-    databese: 0
-    password:

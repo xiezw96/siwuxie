@@ -1,12 +1,10 @@
 package tk.xiezw.siwuxie.common.util;
 
 import cn.hutool.cache.CacheUtil;
-import cn.hutool.db.nosql.redis.RedisDS;
-import cn.hutool.setting.Setting;
-import org.springframework.context.ApplicationContext;
-import redis.clients.jedis.Jedis;
-import tk.xiezw.siwuxie.common.propertie.LocalCachePropertie;
-import tk.xiezw.siwuxie.common.propertie.RedisCachePropertie;
+import cn.hutool.cache.file.LFUFileCache;
+import cn.hutool.cache.file.LRUFileCache;
+import cn.hutool.cache.impl.*;
+import cn.hutool.core.date.DateUnit;
 
 /**
  * @author xiezw
@@ -14,43 +12,18 @@ import tk.xiezw.siwuxie.common.propertie.RedisCachePropertie;
  */
 public class Cache {
 
-    private static cn.hutool.cache.Cache<String, String> fifoCache;
+    private static FIFOCache fifo = CacheUtil.newFIFOCache(1000);
 
-    private static Jedis jedis;
+    private static LFUCache lfu = CacheUtil.newLFUCache(1000);
 
-    static {
-        LocalCachePropertie localCachePropertie = Context.getBean(LocalCachePropertie.class);
-        RedisCachePropertie redisCachePropertie = Context.getBean(RedisCachePropertie.class);
-        if (localCachePropertie != null && redisCachePropertie != null) {
-            Setting setting = new Setting();
-            setting.set("host", redisCachePropertie.getHost());
-            setting.set("port", String.valueOf(redisCachePropertie.getPort()));
-            setting.set("database", String.valueOf(redisCachePropertie.getDatabese()));
-            setting.set("password", redisCachePropertie.getPassword());
-            fifoCache = CacheUtil.newFIFOCache(localCachePropertie.getCapacity());
-            jedis = RedisDS.create(setting, null).getJedis();
-        } else {
-            fifoCache = cn.hutool.cache.CacheUtil.newFIFOCache(3000);
-            jedis = RedisDS.create().getJedis();
-        }
-    }
+    private static LRUCache lru = CacheUtil.newLRUCache(1000);
 
-    public static void localSet(String key, String value) {
-        fifoCache.put(key, value);
-    }
+    private static TimedCache timed = CacheUtil.newTimedCache(DateUnit.DAY.getMillis());
 
-    public static String localGet(String key) {
-        return fifoCache.get(key);
-    }
+    private static WeakCache weak = CacheUtil.newWeakCache(DateUnit.DAY.getMillis());
 
-    public static void redisSet(String key, String value) {
-        jedis.set(key, value);
-    }
+    private static LFUFileCache lfuFile = new LFUFileCache(1000, 1000, DateUnit.DAY.getMillis());
 
-    public static String redisSetGet(String key) {
-        return jedis.get(key);
-    }
-
-    private static ApplicationContext applicationContext;
+    private static LRUFileCache lruFile = new LRUFileCache(1000, 1000, DateUnit.DAY.getMillis());
 
 }

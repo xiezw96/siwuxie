@@ -16,7 +16,7 @@ public class Weather {
     private static final String WEATHER_APP_SECRET = "8TuslXeM";
     private static final String WEATHER_APP_VERSION = "v1";
 
-    public static String getWeatherInfo(String city) {
+    public static String getInfo(String city) {
         if (StrUtil.isNotBlank(city)) {
             Dict paramDict = Dict.create()
                     .set("appid", WEATHER_APP_ID)

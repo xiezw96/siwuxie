@@ -14,6 +14,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public R login() {
+        int i = 8/0;
         return R.ok();
     }
 

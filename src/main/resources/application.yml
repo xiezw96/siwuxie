@@ -2,9 +2,6 @@ server:
   port: 80
 
 spring:
-  devtools:
-    livereload:
-      enabled: false
   profiles:
     active: dev
 
@@ -12,7 +9,3 @@ logging:
   file: siwuxie.log
   level:
     org.springframework.web: off
-
-siwuxie:
-  cors-open: true
-  swagger-open: true
