@@ -1,11 +1,10 @@
 package tk.xiezw.siwuxie;
 
-import cn.hutool.core.thread.ThreadUtil;
+import cn.hutool.log.StaticLog;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import tk.xiezw.siwuxie.common.util.Context;
-import tk.xiezw.siwuxie.common.util.Log;
 
 /**
  * @author xiezw
@@ -15,22 +14,9 @@ import tk.xiezw.siwuxie.common.util.Log;
 public class SiwuxieApplication {
 
     public static void main(String[] args) {
-        Class<SiwuxieApplication> clazz = SiwuxieApplication.class;
-        ConfigurableApplicationContext context = SpringApplication.run(clazz, args);
-        Context.setApplicationContext(context);
-        Log.info(clazz, "思无邪项目已启动！");
-        //ThreadUtil.excAsync(initThread);
+        ConfigurableApplicationContext context = SpringApplication.run(SiwuxieApplication.class, args);
+        Context.init(context);
+        StaticLog.info("思无邪项目已启动！");
     }
 
-}
-
-class initThread implements Runnable {
-    public void run() {
-        while (true) {
-            System.out.println(System.currentTimeMillis());
-            ThreadUtil.sleep(3000);
-            System.out.println(System.currentTimeMillis());
-            System.out.println("初始化成功！");
-        }
-    }
 }

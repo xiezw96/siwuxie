@@ -10,7 +10,7 @@ public class Context {
 
     private static ApplicationContext applicationContext;
 
-    public static void setApplicationContext(ApplicationContext context) {
+    public static void init(ApplicationContext context) {
         applicationContext = context;
     }
 
