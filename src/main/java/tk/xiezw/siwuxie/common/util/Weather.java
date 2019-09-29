@@ -1,10 +1,8 @@
 package tk.xiezw.siwuxie.common.util;
 
-import cn.hutool.core.io.file.FileReader;
+import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.lang.Dict;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 
 /**
@@ -19,31 +17,39 @@ public class Weather {
     private static final String WEATHER_VERSION_FORECAST = "v1";
     private static final String WEATHER_VERSION_LIVE = "v6";
 
-    private static String api(String version, String cityId) {
+    private static String api(String version, String city) {
         Dict paramDict = Dict.create()
                 .set("appid", WEATHER_ID)
                 .set("appsecret", WEATHER_SECRET)
                 .set("version", version)
-                .set("cityid", cityId);
-        return HttpUtil.get(WEATHER_URL, paramDict);
+                .set("city", city);
+        String result = HttpUtil.get(WEATHER_URL, paramDict);
+        Dict dict = JSONUtil.toBean(result, Dict.class);
+        if (city.equals(dict.get("city"))) {
+            return result;
+        }
+        return null;
+    }
+
+    private static String getInfo(String version, String city, String key) {
+        String value = Redis.get(key);
+        if (value == null) {
+            value = api(version, city);
+            if (value != null) {
+                Redis.set(key, value, DateUnit.HOUR.getMillis() * 3);
+            }
+        }
+        return value;
     }
 
     public static String getForecastInfo(String city) {
-
-        return api(WEATHER_VERSION_FORECAST, city);
+        String key = Constant.REDIS_WEATHER_FORECAST + city;
+        return getInfo(WEATHER_VERSION_FORECAST, city, key);
     }
 
     public static String getLiveInfo(String city) {
-        return api(WEATHER_VERSION_LIVE, city);
-    }
-
-    public static void main(String[] args) {
-        FileReader fileReader = new FileReader("json/city.json");
-        JSONArray jsonArray = JSONUtil.parseArray(fileReader.readString());
-        for (int i = 0; i < jsonArray.size(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-        }
+        String key = Constant.REDIS_WEATHER_LIVE + city;
+        return getInfo(WEATHER_VERSION_LIVE, city, key);
     }
 
 }
